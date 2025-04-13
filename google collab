@@ -1,0 +1,27 @@
+from google.colab import files
+uploaded = files.upload()
+
+//extract zip file
+import zipfile
+import os
+
+# Extract the uploaded ZIP file
+zip_path = 'API_SL.TLF.TOTL.IN_DS2_en_csv_v2_13576.zip'
+extract_path = 'world_bank_data'
+
+with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    zip_ref.extractall(extract_path)
+
+# Check the files extracted
+os.listdir(extract_path)
+
+//Load the main csv file
+import pandas as pd
+
+# Load the main dataset
+file_path = os.path.join(extract_path, 'API_SL.TLF.TOTL.IN_DS2_en_csv_v2_13576.csv')
+df = pd.read_csv(file_path, skiprows=4)
+
+# Preview the data
+df.head()
+
